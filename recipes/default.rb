@@ -37,4 +37,26 @@ end
 gem_package "bundler" do
   options(:prerelease => true)
 end
-gem_package "chef"
+
+if node[:ruby][:version].include?('2.0.0')
+  # need to check out chef repo and build manually
+  # current chef (3/12/13) bombs with rubygems 2.0
+  git "#{Chef::Config[:file_cache_path]}/chef" do
+    repository "git@github.com:opscode/chef.git"
+    reference "CHEF-3935"
+    action :checkout
+    notifies :run, "bash[install_custom_chef]"
+  end
+
+  bash "install_custom_chef" do
+    user "root"
+    cwd "#{Chef::Config[:file_cache_path]}/chef"
+    code <<-EOH
+      gem build chef.gemspec
+      gem install chef-11.4.0.gem --no-ri --no-rdoc
+    EOH
+    action :nothing
+  end
+else
+  gem_package "chef"
+end
