@@ -6,9 +6,10 @@ Requirements
 ------------
 Only tested on Ubuntu 12.04, but since compiling from src it should work on other platforms.
 
+Depends on ```build-essential``` cookbook distributed by Opscode.
+
 Attributes
 ----------
-
 #### ruby-src::default
 <table>
   <tr>

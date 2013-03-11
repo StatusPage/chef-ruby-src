@@ -1,7 +1,11 @@
-name             'ruby-src'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
-license          'All rights reserved'
-description      'Installs/Configures ruby-src'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.0'
+name              "ruby-src"
+maintainer        "https://www.statuspage.io"
+maintainer_email  "scott@statuspage.io"
+license           "Apache 2.0"
+description       "Installs system ruby from source"
+version           "1.0.0"
+recipe            "ruby-src", "Installs system ruby from source."
+
+%w{ ubuntu debian }.each do |os|
+  supports os
+end
