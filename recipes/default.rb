@@ -12,6 +12,7 @@
 package 'zlib1g-dev'
 package 'libyaml-dev'
 package 'libssl-dev'
+package 'libreadline-dev'
 
 remote_file "#{Chef::Config[:file_cache_path]}/ruby-#{node[:ruby][:version]}.tar.gz" do
   source "http://ftp.ruby-lang.org/pub/ruby/#{node[:ruby][:version][0..2]}/ruby-#{node[:ruby][:version]}.tar.gz"
@@ -23,13 +24,13 @@ bash "install_ruby" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
     tar -zxf ruby-#{node[:ruby][:version]}.tar.gz
-    (cd ruby-#{node[:ruby][:version]}/ && ./configure && make -j8 && make install)
+    (cd ruby-#{node[:ruby][:version]}/ && make clean && ./configure && make -j8 && make install)
   EOH
   action :nothing
 end
 
 bash "ensure_ruby_install" do
-  not_if "ruby -v | grep -q \"#{node[:ruby][:version].gsub('-', '')}\""
+  not_if "ruby -v | grep \"#{node[:ruby][:version].gsub('-', '')}\""
   user "root"
   notifies :run, "bash[install_ruby]", :immediately
   notifies :install, "gem_package[bundler]", :immediately
