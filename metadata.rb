@@ -9,6 +9,6 @@ recipe            "ruby-src", "Installs system ruby from source."
 depends           "build-essential"
 depends           "git" # feel free to remove this if you aren't building ruby 2
 
-%w{ ubuntu debian }.each do |os|
+%w{ ubuntu debian centos redhat fedora amazon }.each do |os|
   supports os
 end
