@@ -32,7 +32,7 @@ bash "install_ruby" do
   user "root"
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
-    tar -zxf ruby-#{node[:ruby][:version]}.tar.gz
+    tar --no-same-owner -zxf ruby-#{node[:ruby][:version]}.tar.gz
     (cd ruby-#{node[:ruby][:version]}/ && ./configure #{node[:ruby][:configure_opts]} && make #{node[:ruby][:make_opts]} && make install)
   EOH
   action :nothing
