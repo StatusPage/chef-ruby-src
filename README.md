@@ -2,6 +2,9 @@ ruby-src Cookbook
 ====================
 Basic cookbook to install ruby from src on Ubuntu 12.04 LTS
 
+[![Build Status](https://secure.travis-ci.org/StatusPage/chef-ruby-src.png)](http://travis-ci.org/StatusPage/chef-ruby-src)
+
+
 Requirements
 ------------
 Only tested on Ubuntu 12.04, but since compiling from src it should work on other platforms.
